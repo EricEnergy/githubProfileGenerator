@@ -1,5 +1,5 @@
 const questions = [
-  
+   
 ];
 
 function writeToFile(fileName, data) {
