@@ -25,6 +25,9 @@ const colors = {
   }
 };
 
+generateHTML("./repos.txt") 
+
+
 function generateHTML(data) {
   return `<!DOCTYPE html>
 <html lang="en">
