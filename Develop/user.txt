@@ -1,34 +1,4 @@
-const fs = require("fs");
-
-const colors = {
-  green: {
-    wrapperBackground: "#E6E1C3",
-    headerBackground: "#C1C72C",
-    headerColor: "black",
-    photoBorderColor: "#black"
-  },
-  blue: {
-    wrapperBackground: "#5F64D3",
-    headerBackground: "#26175A",
-    headerColor: "white",
-    photoBorderColor: "#73448C"
-  },
-  pink: {
-    wrapperBackground: "#879CDF",
-    headerBackground: "#FF8374",
-    headerColor: "white",
-    photoBorderColor: "#FEE24C"
-  },
-  red: {
-    wrapperBackground: "#DE9967",
-    headerBackground: "#870603",
-    headerColor: "white",
-    photoBorderColor: "white"
-  }
-};
-
-function generateHTML(themeColor, userInfo, totalStars) {
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -54,7 +24,7 @@ function generateHTML(themeColor, userInfo, totalStars) {
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[themeColor].wrapperBackground};
+         background-color: #E6E1C3;
          padding-top: 100px;
          }
          body {
@@ -96,8 +66,8 @@ function generateHTML(themeColor, userInfo, totalStars) {
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[themeColor].headerBackground};
-         color: ${colors[themeColor].headerColor};
+         background-color: #C1C72C;
+         color: black;
          padding: 10px;
          width: 95%;
          border-radius: 6px;
@@ -108,7 +78,7 @@ function generateHTML(themeColor, userInfo, totalStars) {
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[themeColor].photoBorderColor};
+         border: 6px solid #black;
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -149,8 +119,8 @@ function generateHTML(themeColor, userInfo, totalStars) {
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[themeColor].headerBackground};
-           color: ${colors[themeColor].headerColor};
+           background-color: #C1C72C;
+           color: black;
            margin: 20px;
          }
          
@@ -174,43 +144,40 @@ function generateHTML(themeColor, userInfo, totalStars) {
       
       <div class="row wrapper">
         <div class="photo header col">
-          <img src="${userInfo.image}" alt="avatar">
-          <h1>Hi! I'm ${userInfo.name}!</h1>
+          <img src="https://avatars1.githubusercontent.com/u/363521?v=4" alt="avatar">
+          <h1>Hi! I'm Anthony Cooper!</h1>
           <p class="links-nav">
-            <a href="https://www.google.com/maps/place/${userInfo.location}" class="nav-link"><i class="fas fa-map-marker"></i> ${userInfo.location}</a>
-            <a href="${userInfo.profile}"class="nav-link"><i class="fab fa-github-square"></i> GitHub</a>
-            <a href="${userInfo.blog}" class="nav-link"><i class="fas fa-rss-square"></i> Blog</a>
+            <a href="https://www.google.com/maps/place/Franklin, TN" class="nav-link"><i class="fas fa-map-marker"></i> Franklin, TN</a>
+            <a href="https://github.com/antcoop"class="nav-link"><i class="fab fa-github-square"></i> GitHub</a>
+            <a href="http://www.anthonycooper.me" class="nav-link"><i class="fas fa-rss-square"></i> Blog</a>
           </p>        
         </div>
       </div>
       <div class="container">
         
         <div class="row" id="#bio">
-            <h3 class="col">${userInfo.bio}</h3>
+            <h3 class="col">null</h3>
         </div>
         <div class="row">
           <div class="card col">
             <h4>Public Repositories</h4>
-            <h5>${userInfo.publicrepos}</h5>
+            <h5>4</h5>
           </div>
           <div class="card col">
             <h4>Followers</h4>
-            <h5>${userInfo.followers}</h5>
+            <h5>15</h5>
           </div>
         </div>
         <div class="row">
           <div class="card col">
             <h4>GitHub Stars</h4>
-            <h5>${totalStars}</h5>
+            <h5>3</h5>
           </div>
           <div class="card col">
             <h4>Following</h4>
-            <h5>${userInfo.following}</h5>
+            <h5>9</h5>
           </div>
         </div>
       </div>
     </body>
-  </html>`
-}
-
-module.exports = generateHTML;
+  </html>

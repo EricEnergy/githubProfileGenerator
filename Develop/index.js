@@ -1,12 +1,12 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-var usersData = require("./generateHTML");
+var generateHTML = require("./generateHTML");
 const pdf = require('html-pdf');
 
 
 
-function writeToPDF(generateHTML) {
+function writeToPDF(html) {
     const options = { format: 'Letter' };
     pdf.create(html, options).toFile('./resume.pdf', (err) => {
       if (err) throw err;
@@ -14,20 +14,20 @@ function writeToPDF(generateHTML) {
   } 
 
 async function init() {
-    const usersAnswers = await inquirer.prompt([{
-        message: "Enter your GitHub username:",
-        name: "username"
-        },
-    {
-        type: "list",
-        message: "What is your preferred color?",
-        name: "contact",
-        choices: ["green", "blue", "pink", "red"]
-    }]);
-    let username = usersAnswers.username;
-    let themeColor = usersAnswers.contact;
-    
     try {
+        const usersAnswers = await inquirer.prompt([{
+            message: "Enter your GitHub username:",
+            name: "username"
+            },
+        {
+            type: "list",
+            message: "What is your preferred color?",
+            name: "contact",
+            choices: ["green", "blue", "pink", "red"]
+        }]);
+        let username = usersAnswers.username;
+        let themeColor = usersAnswers.contact;
+
         const response = await axios(`https://api.github.com/users/${username}`);
         let userInfo = {
             image: response.data.avatar_url,
@@ -43,13 +43,11 @@ async function init() {
         var userStars = await axios(`https://api.github.com/users/${username}/starred`);
         var totalStars = userStars.data.length;
        
-        // usersData.generateHTML(themeColor, userInfo, totalStars);
-        fs.writeFile("user.json", JSON.stringify([userInfo, totalStars, themeColor], null, 2), function(err){
-            if(err){throw err}
-        })
+        const html = await generateHTML(themeColor, userInfo, totalStars);  //here starts the issue
+        writeToPDF(html);
     } catch (error) {
         throw error;
     }
 }
 
-init()
+init();
