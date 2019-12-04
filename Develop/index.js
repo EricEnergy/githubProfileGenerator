@@ -43,10 +43,10 @@ async function init() {
         var userStars = await axios(`https://api.github.com/users/${username}/starred`);
         var totalStars = userStars.data.length;
        
-        usersData.generateHTML(themeColor, userInfo, totalStars);
-        // fs.writeFile("user.json", JSON.stringify([userInfo, totalStars, themeColor], null, 2), function(err){
-        //     if(err){throw err}
-        // })
+        // usersData.generateHTML(themeColor, userInfo, totalStars);
+        fs.writeFile("user.json", JSON.stringify([userInfo, totalStars, themeColor], null, 2), function(err){
+            if(err){throw err}
+        })
     } catch (error) {
         throw error;
     }
