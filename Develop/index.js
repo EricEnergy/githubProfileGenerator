@@ -1,11 +1,17 @@
-// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
+var usersData = require("./generateHTML");
+const pdf = require('html-pdf');
 
 
-// create questions to ask user 
 
+function writeToPDF(generateHTML) {
+    const options = { format: 'Letter' };
+    pdf.create(html, options).toFile('./resume.pdf', (err) => {
+      if (err) throw err;
+    });
+  } 
 
 async function init() {
     const usersAnswers = await inquirer.prompt([{
@@ -19,7 +25,7 @@ async function init() {
         choices: ["green", "blue", "pink", "red"]
     }]);
     let username = usersAnswers.username;
-    let colorTheme = usersAnswers.contact;
+    let themeColor = usersAnswers.contact;
     
     try {
         const response = await axios(`https://api.github.com/users/${username}`);
@@ -35,15 +41,12 @@ async function init() {
             following: response.data.following,
         }
         var userStars = await axios(`https://api.github.com/users/${username}/starred`);
-        for (var i = 0; i < userstars.data.length; i++){
-            var totalStars = totalStars + userStars.data[1].stargazers_count};
-
-        var stars = totalStars;
-        fs.writeFile("user.json", JSON.stringify(stars, null, 2), function(err){
-            if(err){ throw err}
-        })
-        console.log(colorTheme);
-        console.log(stars);
+        var totalStars = userStars.data.length;
+       
+        usersData.generateHTML(themeColor, userInfo, totalStars);
+        // fs.writeFile("user.json", JSON.stringify([userInfo, totalStars, themeColor], null, 2), function(err){
+        //     if(err){throw err}
+        // })
     } catch (error) {
         throw error;
     }

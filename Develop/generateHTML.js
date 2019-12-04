@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const colors = {
   green: {
     wrapperBackground: "#E6E1C3",
@@ -25,10 +27,7 @@ const colors = {
   }
 };
 
-generateHTML("./repos.txt") 
-
-
-function generateHTML(data) {
+function generateHTML(themeColor, userInfo, totalStars) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -55,7 +54,7 @@ function generateHTML(data) {
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[data.color].wrapperBackground};
+         background-color: ${colors[themeColor].wrapperBackground};
          padding-top: 100px;
          }
          body {
@@ -97,8 +96,8 @@ function generateHTML(data) {
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[data.color].headerBackground};
-         color: ${colors[data.color].headerColor};
+         background-color: ${colors[themeColor].headerBackground};
+         color: ${colors[themeColor].headerColor};
          padding: 10px;
          width: 95%;
          border-radius: 6px;
@@ -109,7 +108,7 @@ function generateHTML(data) {
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[data.color].photoBorderColor};
+         border: 6px solid ${colors[themeColor].photoBorderColor};
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -140,7 +139,6 @@ function generateHTML(data) {
          padding-left: 100px;
          padding-right: 100px;
          }
-
          .row {
            display: flex;
            flex-wrap: wrap;
@@ -148,12 +146,11 @@ function generateHTML(data) {
            margin-top: 20px;
            margin-bottom: 20px;
          }
-
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[data.color].headerBackground};
-           color: ${colors[data.color].headerColor};
+           background-color: ${colors[themeColor].headerBackground};
+           color: ${colors[themeColor].headerColor};
            margin: 20px;
          }
          
@@ -161,17 +158,61 @@ function generateHTML(data) {
          flex: 1;
          text-align: center;
          }
-
          a, a:hover {
          text-decoration: none;
          color: inherit;
          font-weight: bold;
          }
-
          @media print { 
           body { 
             zoom: .75; 
           } 
          }
-      </style>`
-        }
+      </style>
+    </head>
+    <body>
+      
+      <div class="row wrapper">
+        <div class="photo header col">
+          <img src="${userInfo.image}" alt="avatar">
+          <h1>Hi! I'm ${userInfo.name}!</h1>
+          <p class="links-nav">
+            <a href="https://www.google.com/maps/place/${userInfo.location}" class="nav-link"><i class="fas fa-map-marker"></i> ${userInfo.location}</a>
+            <a href="${userInfo.profile}"class="nav-link"><i class="fab fa-github-square"></i> GitHub</a>
+            <a href="${userInfo.blog}" class="nav-link"><i class="fas fa-rss-square"></i> Blog</a>
+          </p>        
+        </div>
+      </div>
+      <div class="container">
+        
+        <div class="row" id="#bio">
+            <h3 class="col">${userInfo.bio}</h3>
+        </div>
+        <div class="row">
+          <div class="card col">
+            <h4>Public Repositories</h4>
+            <h5>${userInfo.publicrepos}</h5>
+          </div>
+          <div class="card col">
+            <h4>Followers</h4>
+            <h5>${userInfo.followers}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card col">
+            <h4>GitHub Stars</h4>
+            <h5>${totalStars}</h5>
+          </div>
+          <div class="card col">
+            <h4>Following</h4>
+            <h5>${userInfo.following}</h5>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>`
+}
+
+module.exports = {
+  writeToPDF(generateHTML);
+}

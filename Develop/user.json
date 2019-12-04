@@ -1,1 +1,15 @@
-2
+[
+  {
+    "image": "https://avatars3.githubusercontent.com/u/470?v=4",
+    "name": "Eric Lindvall",
+    "location": "Seattle, WA",
+    "profile": "https://github.com/eric",
+    "blog": "http://bitmonkey.net/",
+    "bio": null,
+    "publicrepos": 186,
+    "followers": 212,
+    "following": 41
+  },
+  30,
+  "green"
+]
