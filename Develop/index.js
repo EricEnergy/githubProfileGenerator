@@ -8,7 +8,7 @@ const pdf = require('html-pdf');
 
 function writeToPDF(html) {
     const options = { format: 'Letter' };
-    pdf.create(html, options).toFile('./resume.pdf', (err) => {
+    pdf.create(html, options).toFile('./gitHubSnapShot.pdf', (err) => {
       if (err) throw err;
     });
   } 
