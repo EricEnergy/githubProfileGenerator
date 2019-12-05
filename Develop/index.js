@@ -27,6 +27,7 @@ async function init() {
         }]);
         let username = usersAnswers.username;
         let themeColor = usersAnswers.contact;
+        let bio;
 
         const response = await axios(`https://api.github.com/users/${username}`);
         let userInfo = {
@@ -40,6 +41,9 @@ async function init() {
             followers: response.data.followers,
             following: response.data.following,
         }
+        if(userInfo.bio === null)
+        { userInfo.bio  = "No bio Available"}
+
         var userStars = await axios(`https://api.github.com/users/${username}/starred`);
         var totalStars = userStars.data.length;
        

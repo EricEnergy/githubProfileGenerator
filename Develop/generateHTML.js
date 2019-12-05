@@ -103,11 +103,12 @@ function generateHTML(themeColor, userInfo, totalStars) {
          border-radius: 6px;
          }
          .photo-header img {
-         width: 250px;
-         height: 250px;
+         width: 200px;
+         height: auto;
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
+         margin-right: 85%;
          border: 6px solid ${colors[themeColor].photoBorderColor};
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
@@ -116,7 +117,6 @@ function generateHTML(themeColor, userInfo, totalStars) {
          text-align: center;
          }
          .photo-header h1 {
-         margin-top: 10px;
          }
          .links-nav {
          width: 100%;
@@ -143,7 +143,6 @@ function generateHTML(themeColor, userInfo, totalStars) {
            display: flex;
            flex-wrap: wrap;
            justify-content: space-between;
-           margin-top: 20px;
            margin-bottom: 20px;
          }
          .card {
@@ -173,16 +172,16 @@ function generateHTML(themeColor, userInfo, totalStars) {
     <body>
       
       <div class="row wrapper">
-        <div class="photo header col">
+        <div class="photo-header col">
           <img src="${userInfo.image}" alt="avatar">
-          <h1>Hi! I'm ${userInfo.name}!</h1>
+          <h1> ${userInfo.name} GitHub Profile Snap Shot!</h1>
           <p class="links-nav">
             <a href="https://www.google.com/maps/place/${userInfo.location}" class="nav-link"><i class="fas fa-map-marker"></i> ${userInfo.location}</a>
-            <a href="${userInfo.profile}"class="nav-link"><i class="fab fa-github-square"></i> GitHub</a>
+            <i class="fab fa-github-square"></i>${userInfo.profile}
             <a href="${userInfo.blog}" class="nav-link"><i class="fas fa-rss-square"></i> Blog</a>
           </p>        
         </div>
-      </div>
+      
       <div class="container">
         
         <div class="row" id="#bio">
@@ -207,6 +206,7 @@ function generateHTML(themeColor, userInfo, totalStars) {
             <h4>Following</h4>
             <h5>${userInfo.following}</h5>
           </div>
+        </div>
         </div>
       </div>
     </body>
